@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+//IMPORT COMPONENTS
+import Navbar from "./navbar/navbar";
+import Login from "./login/login";
+import Register from "./register/register";
+import Dashboard from "./dashboard/dashboard";
+import PublicPage from './publicpage/publicpage';
+
+//PROTECTING ROUTES
+
+import ProtectedRoute from './protectedroute/protectedroute';
+
+//IMPORTING CONTEXT
+import { AppProvider } from "./context/context"
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <AppProvider>
+        <Router>
+          <Switch>
+            <Route render={() => (<Login />)} path="/login" exact></Route>
+            <Route component={Register} path="/register" exact></Route>
+            <Route path="/">
+              <Route path="/"><Navbar /> </Route>
+              <ProtectedRoute component={Dashboard} path="/" exact ></ProtectedRoute>
+              <Route render={() => (<PublicPage />)} path="/publicpage" exact></Route>
+            </Route>
+          </Switch>
+        </Router>
+      </AppProvider>
+    </>
   );
 }
 

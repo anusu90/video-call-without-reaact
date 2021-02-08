@@ -1,0 +1,45 @@
+#root {
+  height: 100vh;
+}
+
+.register-ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+  border: 1px grey solid;
+  font-family: "Ubuntu", sans-serif;
+
+  /* text-align: center; */
+}
+
+.register-link {
+  line-height: 32px;
+}
+
+.register-form-div {
+  border-top: 1px grey solid;
+  border-right: 1px grey solid;
+  border-bottom: 1px grey solid;
+}
+
+.register-form {
+  padding: 10px 20px;
+}
+
+.register-btn-register {
+  background-color: #298f24;
+  padding: 5px 20px;
+  border-radius: 5px;
+  border: transparent;
+  letter-spacing: 2px;
+  width: 50%;
+  height: 50px;
+  font-size: 20px;
+}
+
+.register-btn-register:hover {
+  background-color: #9cc39a;
+  transition: 500ms;
+}
