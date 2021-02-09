@@ -48,7 +48,9 @@ export default function Dashboard() {
         <div>
             <button className="btn btn-primary" onClick={checkStatus}> CHECK STATUS </button>
             <button className="btn btn-primary" onClick={() => { getMedia({ audio: true, video: true }) }}> Start Call </button>
+
             <VideoChat></VideoChat>
+
         </div>
     )
 }
