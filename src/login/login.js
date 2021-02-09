@@ -32,7 +32,7 @@ export default function Login() {
         console.log(btn.current)
         btn.current.disabled = true;
 
-        let url = String(process.env.REACT_APP_BACKEND_URL) + "/users/login";
+        let url = String(process.env.REACT_APP_BACKEND_URL) + "/login";
         console.log(url)
         let data = {
             email: email,
