@@ -16,6 +16,7 @@ export default function Login() {
     let history = useHistory();
 
     const [userState, setUserState] = useContext(AppContext).userStatus;
+    const [user, setuser] = useContext(AppContext).whichUser;
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -49,15 +50,18 @@ export default function Login() {
             body: JSON.stringify(data)
         });
 
-        let loginrReqBody = await loginRequest.json();
+        let loginReqBody = await loginRequest.json();
 
         if (loginRequest.status !== 200) {
-            SetError(loginrReqBody.message)
+            SetError(loginReqBody.message)
+
             setLoading(false);
             btn.current.disabled = false;
 
         } else {
             setUserState(true)
+            console.log(loginReqBody)
+            setuser({ name: loginReqBody.firstname, email: loginReqBody.email })
             history.push("/")
         }
 

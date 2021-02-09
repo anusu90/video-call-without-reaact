@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-
+import VideoChat from "../videochat/videochat"
 
 export default function Dashboard() {
 
@@ -19,9 +19,25 @@ export default function Dashboard() {
 
     }
 
+
+
+    async function getMedia(constraints) {
+        let stream = null;
+
+        try {
+            stream = await navigator.mediaDevices.getUserMedia(constraints);
+            console.log(stream)
+        } catch (err) {
+            /* handle the error */
+        }
+    }
+
+
     return (
         <div>
             <button className="btn btn-primary" onClick={checkStatus}> CHECK STATUS </button>
+            <button className="btn btn-primary" onClick={() => { getMedia({ audio: true, video: true }) }}> Start Call </button>
+            <VideoChat></VideoChat>
         </div>
     )
 }
