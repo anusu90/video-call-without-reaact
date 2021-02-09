@@ -7,6 +7,7 @@ import Login from "./login/login";
 import Register from "./register/register";
 import Dashboard from "./dashboard/dashboard";
 import PublicPage from './publicpage/publicpage';
+import Lander from "./landing/lander"
 
 //PROTECTING ROUTES
 
@@ -30,6 +31,7 @@ function App() {
               <Route render={() => (<PublicPage />)} path="/publicpage" exact></Route>
             </Route>
           </Switch>
+          <Lander></Lander>
         </Router>
       </AppProvider>
     </>
