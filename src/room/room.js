@@ -77,6 +77,21 @@ const Room = ({ roomName, token, handleLogout }) => {
 
     }
 
+    const handleJoinRoom2 = () => {
+
+        const { connect } = require('twilio-video');
+
+        connect(tokenIS, {
+            audio: true,
+            name: roomNameIS,
+            video: { width: 640 }
+        }).then(room => {
+            console.log(`Connected to Room: ${room.name}`);
+        });
+
+
+    }
+
 
     return (
 
@@ -94,7 +109,7 @@ const Room = ({ roomName, token, handleLogout }) => {
                                 <br />
                                 <input type="text" id="" className="form-control" placeholder="ROOM" value={roomNameIS} onChange={(e) => setRoomNameIS(e.target.value)} />
                                 <br />
-                                <buttn className="btn btn-primary" onClick={handleJoinRoom}>JOIN ROOM</buttn>
+                                <buttn className="btn btn-primary" onClick={handleJoinRoom2}>JOIN ROOM</buttn>
                             </div>
                         </div>
                     </div>
