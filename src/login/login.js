@@ -58,7 +58,7 @@ export default function Login() {
 
         } else {
             setUserState(true)
-            history.push("/dashboard")
+            history.push("/")
         }
 
     }
