@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import VideoChat from "../videochat/videochat"
+import socketIOClient from "socket.io-client";
 
 export default function Dashboard() {
 
@@ -18,6 +19,16 @@ export default function Dashboard() {
         })
 
     }
+
+    // useEffect(() => {
+    //     console.log("HI")
+
+    //     console.log(String(process.env.REACT_APP_BACKEND_URL) + "/chat")
+
+    //     const socket = socketIOClient(String(process.env.REACT_APP_BACKEND_URL) + "/chat");
+    //     socket.emit("join-room", 5, 6)
+    //     console.log("HELLO")
+    // }, []);
 
 
 

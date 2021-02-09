@@ -10,56 +10,56 @@ const Room = ({ roomName, token, handleLogout }) => {
         <p key={participant.sid}>{participant.identity}</p>
     ));
 
-    useEffect(() => {
-        const participantConnected = participant => {
-            setParticipants(prevParticipants => [...prevParticipants, participant]);
-        };
-
-        const participantDisconnected = participant => {
-            setParticipants(prevParticipants =>
-                prevParticipants.filter(p => p !== participant)
-            );
-        };
-
-        Video.connect(token, {
-            name: roomName
-        }).then(room => {
-            setRoom(room);
-            room.on('participantConnected', participantConnected);
-            room.on('participantDisconnected', participantDisconnected);
-            room.participants.forEach(participantConnected);
-        });
-
-        return () => {
-            setRoom(currentRoom => {
-                if (currentRoom && currentRoom.localParticipant.state === 'connected') {
-                    currentRoom.localParticipant.tracks.forEach(function (trackPublication) {
-                        trackPublication.track.stop();
-                    });
-                    currentRoom.disconnect();
-                    return null;
-                } else {
-                    return currentRoom;
-                }
-            });
-
-        }
-    }, [roomName, token])
-
     // useEffect(() => {
-    //     const { connect } = require('twilio-video');
+    //     const participantConnected = participant => {
+    //         setParticipants(prevParticipants => [...prevParticipants, participant]);
+    //     };
 
-    //     console.log("hi", token)
+    //     const participantDisconnected = participant => {
+    //         setParticipants(prevParticipants =>
+    //             prevParticipants.filter(p => p !== participant)
+    //         );
+    //     };
 
-    //     connect((token), { name: roomName }).then(room => {
-    //         console.log(`Successfully joined a Room: ${room}`);
-    //         room.on('participantConnected', participant => {
-    //             console.log(`A remote Participant connected: ${participant}`);
-    //         });
-    //     }, error => {
-    //         console.error(`Unable to connect to Room: ${error.message}`);
+    //     Video.connect(token, {
+    //         name: roomName
+    //     }).then(room => {
+    //         setRoom(room);
+    //         room.on('participantConnected', participantConnected);
+    //         room.on('participantDisconnected', participantDisconnected);
+    //         room.participants.forEach(participantConnected);
     //     });
-    // }, [token])
+
+    //     return () => {
+    //         setRoom(currentRoom => {
+    //             if (currentRoom && currentRoom.localParticipant.state === 'connected') {
+    //                 currentRoom.localParticipant.tracks.forEach(function (trackPublication) {
+    //                     trackPublication.track.stop();
+    //                 });
+    //                 currentRoom.disconnect();
+    //                 return null;
+    //             } else {
+    //                 return currentRoom;
+    //             }
+    //         });
+
+    //     }
+    // }, [roomName, token])
+
+    useEffect(() => {
+        const { connect } = require('twilio-video');
+
+        console.log("hi", token)
+
+        connect((token), { name: roomName }).then(room => {
+            console.log(`Successfully joined a Room: ${room}`);
+            room.on('participantConnected', participant => {
+                console.log(`A remote Participant connected: ${participant}`);
+            });
+        }, error => {
+            console.error(`Unable to connect to Room: ${error.message}`);
+        });
+    }, [token])
 
 
     return (
