@@ -11,7 +11,7 @@ export default function Dashboard() {
 
     async function checkStatus() {
 
-        let reqC = await fetch(String(process.env.REACT_APP_BACKEND_URL) + "/check", {
+        let reqC = await fetch(String(process.env.REACT_APP_BACKEND_URL) + "/users/check", {
             mode: "cors",
             credentials: 'include',
             method: "GET"

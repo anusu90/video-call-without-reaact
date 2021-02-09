@@ -32,7 +32,7 @@ export default function Login() {
         console.log(btn.current)
         btn.current.disabled = true;
 
-        let url = String(process.env.REACT_APP_BACKEND_URL) + "/login";
+        let url = String(process.env.REACT_APP_BACKEND_URL) + "/users/login";
         console.log(url)
         let data = {
             email: email,
@@ -44,6 +44,8 @@ export default function Login() {
             headers: {
                 'Content-Type': 'application/json'
             },
+            credentials: "include",
+            mode: "cors",
             body: JSON.stringify(data)
         });
 
