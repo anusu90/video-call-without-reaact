@@ -27,11 +27,10 @@ function App() {
             <Route component={Register} path="/register" exact></Route>
             <Route path="/">
               <Route path="/"><Navbar /> </Route>
-              <ProtectedRoute component={Dashboard} path="/" exact ></ProtectedRoute>
-              <Route render={() => (<PublicPage />)} path="/publicpage" exact></Route>
+              <ProtectedRoute component1={Dashboard} component2={PublicPage} path="/dashboard" exact ></ProtectedRoute>
+              {/* <Route render={() => (<PublicPage />)} path="/publicpage" exact></Route> */}
             </Route>
           </Switch>
-          <Lander></Lander>
         </Router>
       </AppProvider>
     </>

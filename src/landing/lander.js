@@ -28,13 +28,13 @@ export default function Lander() {
 
             if (checkRequest.status === 200) {
                 setUserState(true);
-                // setuser()
-                <Redirect to="/"></Redirect>
+                console.log("hello");
+
             }
 
-            else {
-                <Redirect to="/"></Redirect>
-            }
+            // else {
+            //     <Redirect to="/publicpage"></Redirect>
+            // }
         }
 
         checkStatus();
@@ -45,7 +45,7 @@ export default function Lander() {
 
         <div className="container" style={{ height: "80vh" }}>
             <div className="row h-100 align-items-center">
-                <div className="col-md-12">
+                <div className="col-md-12 text-center">
                     <FontAwesomeIcon icon={faSync} spin color="#298f24" size="10x" />
                 </div>
             </div>
