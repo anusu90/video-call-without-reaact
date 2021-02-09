@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Video from 'twilio-video';
 
 const Room = ({ roomName, token, handleLogout }) => {
@@ -7,6 +7,8 @@ const Room = ({ roomName, token, handleLogout }) => {
     const [participants, setParticipants] = useState([]);
     const [tokenIS, setTokenIS] = useState('');
     const [roomNameIS, setRoomNameIS] = useState('');
+
+    const vidRef = useRef(null)
 
     const remoteParticipants = participants.map(participant => (
         <p key={participant.sid}>{participant.identity}</p>
@@ -87,7 +89,26 @@ const Room = ({ roomName, token, handleLogout }) => {
             video: { width: 640 }
         }).then(room => {
             console.log(`Connected to Room: ${room.name}`);
+
+            room.on('participantConnected', participant => {
+                console.log(`A remote Participant connected: ${participant}`);
+
+                participant.tracks.forEach(publication => {
+                    if (publication.isSubscribed) {
+                        const track = publication.track;
+                        vidRef.current.appendChild(track.attach());
+                    }
+                });
+                participant.on('trackSubscribed', track => {
+                    vidRef.current.appendChild(track.attach());
+                });
+            });
+
+
+
         });
+
+
 
 
     }
@@ -116,6 +137,9 @@ const Room = ({ roomName, token, handleLogout }) => {
                 </form>
             </div>
 
+            <div className="row" ref={vidRef}>
+
+            </div>
             <div className="row text-center" >
                 <h2 className="w-75 text-center">Room: {roomName}</h2>
                 <button onClick={handleLogout}>Log out</button>
